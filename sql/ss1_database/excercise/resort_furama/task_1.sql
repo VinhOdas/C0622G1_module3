@@ -51,18 +51,7 @@ CREATE TABLE `khach_hang` (
   `dia_chi` varchar(45) ,
   PRIMARY KEY (`ma_khach_hang`)
 );
-CREATE TABLE `khach_hang` (
-  `ma_khach_hang` int  ,
-  `ma_loai_hang` int  ,
-  `ho_ten` varchar(45)  ,
-  `ngay_sinh` date  ,
-  `gioi_tinh` bit(1)  ,
-  `so_cmnd` varchar(45)  ,
-  `so_dien_thoai` varchar(45)  ,
-  `email` varchar(45)  ,
-  `dia_chi` varchar(45) ,
-  PRIMARY KEY (`ma_khach_hang`)
-);
+
 CREATE TABLE `hop_dong_chi_tiet` (
   `ma_hop_dong_chi_tiet` int  ,
   `ma_hop_dong` int  ,
@@ -82,13 +71,17 @@ CREATE TABLE `hop_dong` (
 );
 CREATE TABLE `dich_vu_di_kem` (
   `ma_dich_vu_di_kem` int  ,
-  `ten_dich_vu_di_kem`varchar(45),
-  `ngay_ket_thuc` datetime,
-  `tien_dat_coc` double,
-  `ma_nhan_vien` int,
-  `ma_khach_hang` int,
-  `ma_dich_vu` int,
-  PRIMARY KEY (`ma_hop_dong`)
+  `ten_dich_vu_di_kem` varchar(45),
+  `gia` double,
+  `don_vi` varchar(10),
+  PRIMARY KEY (`ma_dich_vu_di_kem`)
+);
+create table `dich_vu`(
+ma_dich_vu int ,
+ten_dich_vu varchar(45),
+dien_tich int ,
+chi_phi_thue double,
+so_nguoi
 );
 
 
