@@ -10,8 +10,8 @@ xác định mối quan hệ
 1-n: NHACC và DONDH 
 n-n PHIEUXUAT và VATTU, VATTU và DONDH, VATTU và PHIEUNHAP
 bước 3:
-+ trong mô hình này không có thuộc tính đa trị
 xác định các thuộc tính đa trị và tạo thành bảng mới
+thuộc tính đa trị là số điện thoại
 các bảng mới được tạo thành là:
 Chi tiết phiếu xuất:bảng được tạo ra từ quan hệ n-n của bảng
 PHIEUXUAT VS VATTU

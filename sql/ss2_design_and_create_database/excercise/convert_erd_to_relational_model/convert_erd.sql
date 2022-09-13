@@ -1,12 +1,18 @@
 drop database if exists convert_erd_to_relational_model;
 create database convert_erd_to_relational_model;
 use convert_erd_to_relational_model;
+create table chi_tiet_sdt(
+sdt int primary key,
+ma_vung varchar(45)
+);
 create table nha_cung_cap(
 ma_ncc int primary key,
 ten_ncc varchar(45),
 dia_chi varchar(45),
-sdt int
+sdt int,
+foreign key(sdt) references chi_tiet_sdt(sdt)
 ); 
+
 create table vat_tu(
 ma_vat_tu int primary key,
 ten_vat_tu varchar(45)
