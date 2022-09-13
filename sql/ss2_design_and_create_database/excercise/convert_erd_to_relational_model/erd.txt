@@ -1,0 +1,24 @@
+bước 1:
+các thực thể:
+NHACC
+DOnDH
+VATTU
+PHIEUNHAP
+PHIEUXUAT
+bước 2:
+xác định mối quan hệ
+1-n: NHACC và DONDH 
+n-n PHIEUXUAT và VATTU, VATTU và DONDH, VATTU và PHIEUNHAP
+bước 3:
++ trong mô hình này không có thuộc tính đa trị
+xác định các thuộc tính đa trị và tạo thành bảng mới
+các bảng mới được tạo thành là:
+Chi tiết phiếu xuất:bảng được tạo ra từ quan hệ n-n của bảng
+PHIEUXUAT VS VATTU
+chi tiết đơn đặt hàng: bảng được tạo ra từ quan hệ n-n của bảng
+VATTU VS DONDH
+chi tiết phiếu xuất: bảng được tạo ra từ quan hệ n-n của bảng
+VATTU VS PHIEUNHAP
+bước 4: liệt kê:
+NHACC,VATTU,DONDH,CTDONDH,PHIEUNHAP,CTPHIEUNHAP
+PHIEUXUAT,CTPHIEUXUAT
