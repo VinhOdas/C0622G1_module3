@@ -212,19 +212,19 @@ WHERE (khach_hang.ma_loai_khach=1)
  -- (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
  select
     kh.ma_khach_hang,
-    kh.ho_va_ten,
+    kh.ho_ten,
     lk.ten_loai_khach,
     hd.ma_hop_dong,
     dv.ten_dich_vu,
     hd.ngay_lam_hop_dong,
-    hd.ngay_ket_hop_dong,
- (ifnull(dv.chi_phi_cho_thue,0)+ SUM(ifnull(hdct.so_luong,0)*ifnull(dvkt.gia,0))) as tong_tien
+    hd.ngay_ket_thuc,
+ (ifnull(dv.chi_phi_thue,0)+ SUM(ifnull(hdct.so_luong,0)*ifnull(dvdk.gia,0))) as tong_tien
  from hop_dong hd
 left join khach_hang kh on kh.ma_khach_hang = hd.ma_khach_hang
 left join dich_vu dv on dv.ma_dich_vu = hd.ma_dich_vu
 left join hop_dong_chi_tiet hdct on hdct.ma_hop_dong = hd.ma_hop_dong
 left join loai_khach lk on kh.ma_loai_khach = lk.ma_loai_khach
-left join dich_vu_kem_theo dvkt on dvkt.ma_dich_vu_kem_theo = hdct.ma_dich_vu_kem_theo
+left join dich_vu_di_kem dvdk on dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
 group by  hd.ma_hop_dong
 order by  kh.ma_khach_hang ;
 --  6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue,ten_loai_dich_vu
@@ -235,7 +235,7 @@ hd.ngay_lam_hop_dong,
 dv.ma_dich_vu,
 dv.ten_dich_vu,
 dv.dien_tich,
-dv.chi_phi_cho_thue,
+dv.chi_phi_thue,
 ldv.ten_loai_dich_vu
 from dich_vu dv
 join loai_dich_vu ldv on  dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
@@ -251,7 +251,7 @@ group by dv.ma_dich_vu;
 	dv.ten_dich_vu,
 	dv.dien_tich,
 	dv.so_nguoi_toi_da,
-	dv.chi_phi_cho_thue,
+	dv.chi_phi_thue,
 	ldv.ten_loai_dich_vu  as table_2020
 	from dich_vu dv
 	join loai_dich_vu ldv on  dv.ma_loai_dich_vu = ldv.ma_loai_dich_vu
@@ -269,16 +269,16 @@ group by dv.ma_dich_vu;
 -- với yêu cầu ho_ten không trùng nhau.
 --  Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên.
 -- c1
-select distinct kh.ho_va_ten
+select distinct kh.ho_ten
 from khach_hang kh;
 -- c2
-select  kh.ho_va_ten
+select  kh.ho_ten
 from khach_hang kh
 group by kh.ho_va_ten ;
 -- c3
-select  kh.ho_va_ten
+select  kh.ho_ten
 from khach_hang kh
-group by kh.ho_va_ten ;
+group by kh.ho_ten ;
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa
 --  là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
 select
@@ -294,7 +294,7 @@ order by  thang ;
 select
     hop_dong.ma_hop_dong,
     hop_dong.ngay_lam_hop_dong,
-    hop_dong.ngay_ket_hop_dong,
+    hop_dong.ngay_ket_thuc,
     hop_dong.tien_dat_coc,
     COALESCE(sum(hop_dong_chi_tiet.so_luong), 0) as so_luong_dich_vu_di_kem
 from
