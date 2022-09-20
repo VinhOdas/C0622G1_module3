@@ -7,7 +7,7 @@ PHIEUNHAP
 PHIEUXUAT
 bước 2:
 xác định mối quan hệ
-1-n: NHACC và DONDH 
+1-n: NHACC và DONDH
 n-n PHIEUXUAT và VATTU, VATTU và DONDH, VATTU và PHIEUNHAP
 bước 3:
 xác định các thuộc tính đa trị và tạo thành bảng mới
