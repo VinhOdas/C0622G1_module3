@@ -54,7 +54,7 @@ delimiter //
 CREATE PROCEDURE sp_product_edit()
 BEGIN
 SET SQL_SAFE_UPDATES = 0;
-UPDATE products SET product_name = "Vinh Heo" WHERE id = 1;
+UPDATE products SET product_name = "Vinh" WHERE id = 1;
 SELECT * FROM products;
 END //
 delimiter ; 

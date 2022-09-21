@@ -1,4 +1,7 @@
 h1{
+    margin-bottom: -9px;
+}
+hr{
     margin-bottom: unset;
 }
 #start{

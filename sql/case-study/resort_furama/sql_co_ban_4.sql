@@ -1,5 +1,4 @@
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
-set sql_safe_updates = 0;
 DELETE from nhan_vien 
 WHERE NOT EXISTS ( SELECT 
 						 ma_nhan_vien 
@@ -24,7 +23,6 @@ SELECT ma_nhan_vien, ho_ten FROM nhan_vien;
                              HAVING tien_dat_coc > 1000000
                              AND ma_loai_khach =2;
 							
-set sql_safe_updates = 0;
  UPDATE  khach_hang kh
  SET kh.ma_loai_khach = 1
  WHERE kh.ma_loai_khach IN (SELECT ma_loai_khach FROM kh_can_update);
@@ -37,7 +35,7 @@ CREATE VIEW delete_hd_truoc_2021 AS
 								SELECT hd .ma_khach_hang, hd.ngay_lam_hop_dong
 								FROM hop_dong hd 
 								WHERE year(hd.ngay_lam_hop_dong ) <2021;
-                        
+					
 SET FOREIGN_KEY_CHECKS = 0;
 DELETE FROM khach_hang
 WHERE ma_khach_hang IN (SELECT ma_khach_hang FROM  delete_hd_truoc_2021 );
