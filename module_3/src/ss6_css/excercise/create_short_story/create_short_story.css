@@ -5,7 +5,7 @@ h2 {
 
 .mucluc {
     text-align: center;
-    line-height: 5;
+    line-height: 4;
 }
 
 .backgroup {
@@ -17,7 +17,7 @@ h2 {
 
 .csw-btn-button {
     cursor: pointer;
-    font-size: 25px;
+    font-size: 30px;
     padding: 10px 35px;
     border-radius: 10px;
     border: 1px solid #9B6A1D;
@@ -27,17 +27,24 @@ h2 {
     background-color: #a18c5b;
 
 }
+
+.csw-btn-button:hover {
+    background-color: red;
+
+}
 .text-container {
     margin: 0;
     font-size: 150px;
     color: rgba(225,225,225, .01);
-    background-image: url("https://images.pexels.com/photos/1266808/pexels-photo-1266808.jpeg?auto=compress&cs=tinysrgb&w=1200");
+    background-image: url("https://cdn.popsww.com/blog/sites/2/2022/02/ACE_1280x720.jpg");
     background-repeat: repeat;
     -webkit-background-clip:text;
-    animation: animate 100s ease-in-out infinite;
+    /*animation: animate 1s ease-in-out infinite;*/
     text-align: center;
     text-transform: uppercase;
     font-weight: 900;
+    animation: xoayvong 2s linear 0s infinite;
+    -webkit-animation: xoayvong 2s linear 0s infinite;
 }
 @keyframes animate {
     0%, 100% {
@@ -57,3 +64,15 @@ table{
     line-height: 20;
 }
 
+@-webkit-keyframes xoayvong {
+    from {
+        -webkit-transform:rotate(0deg);
+        -moz-transform:rotate(0deg);
+        -o-transform:rotate(0deg);
+    }
+    to {
+        -webkit-transform:rotate(360deg);
+        -moz-transform:rotate(360deg);
+        -o-transform:rotate(360deg);
+    }
+}

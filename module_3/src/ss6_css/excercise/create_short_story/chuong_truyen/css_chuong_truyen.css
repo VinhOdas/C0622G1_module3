@@ -38,6 +38,7 @@ h2 {
     text-align: center;
     text-transform: uppercase;
     font-weight: 900;
+
 }
 @keyframes animate {
     0%, 100% {
@@ -52,6 +53,10 @@ h2 {
     90% {
         background-position: right top;
     }
+}
+p{
+    font-size: 30px;
+    line-height: 150px;
 }
 
 
