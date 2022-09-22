@@ -12,42 +12,89 @@ body {
 
 /*}*/
 #header{
-    background-color: red;
+    display: flex;
+    box-shadow: 1px 0 5px #e0e2e5;
+    padding: 8px 12px;
     width: 100%;
-        top: 0px;
-        position: fixed;
-        z-index: 1;
-   display: flex;
-    align-items: center;
 }
 #house {
-    
-    margin: 10px 50% 10px 20%;
+
+    /*margin: 10px 50% 10px 20%;*/
+    margin: auto;
     font-size: 32px;
-    width: 25%;
-    float: right;
+    width: 0%;
+    float: left;
+    border: 0px solid;
 }
 #video{
-    position: absolute;
-    margin: 10px 50% 10px 20%;
+    /*margin: 10px 50% 10px 20%;*/
+    margin: auto;
     font-size: 32px;
     border: 0px solid;
-    width: 25%;
+    width: 0%;
+    float: left;
+}
+#market{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
+    float: left;
+}
+#game{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
+    float: left;
+}
+#menu{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
     float: right;
 }
+#message{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
+    float: right;
+}
+#notification{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
+    float: right;
+}
+#account{
+    margin: auto;
+    font-size: 32px;
+    border: 0px solid;
+    width: 0%;
+    float: right;
+}
+.mid{
+    display: flex;
+    width: 70%;
+    align-items: center;
+}
+
 .left{
-}
-/*.mid{*/
-
-/*        margin-left: 50px;*/
-/*        height: 100%;*/
-/*        width: auto;*/
-/*        border: 0px solid;*/
-
-/*}*/
+    width: 15%;
+    display: flex;
+    align-items: start;}
 .right{
-
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
 }
+
+
 section {
     margin: 5px;
     padding: 10px;
@@ -61,25 +108,25 @@ article {
     padding: 10px;
     background-color: white;
 }
-nav{
-    width: 100%;
-    position: fixed;
-    clear: both;
-    text-align: center;
-}
-nav ul {
-    padding: 0;
-}
+/*nav{*/
+/*    width: 100%;*/
+/*    position: fixed;*/
+/*    clear: both;*/
+/*    text-align: center;*/
+/*}*/
+/*nav ul {*/
+/*    padding: 0;*/
+/*}*/
 /*nav .nav-item {*/
 /*    margin: 10px;*/
 /*    border: 20px solid;*/
 /*    width: 25%;*/
 /*}*/
 
-nav ul li {
-    display: inline;
-    margin: 0px;
-}
+/*nav ul li {*/
+/*    display: inline;*/
+/*    margin: 0px;*/
+/*}*/
 
 aside{
     width: 27.5%;
