@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-@WebServlet(name = "ProductDiscountCalculator", urlPatterns = {"/display", "/hien-len"})
+@WebServlet(name = "ProductDiscountCalculatorServlet", urlPatterns = {"/display", "/hien-len"})
 public class ProductDiscountCalculator extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -17,12 +17,11 @@ public class ProductDiscountCalculator extends HttpServlet {
         double listPrice = Double.parseDouble(request.getParameter("list_price"));
         BigDecimal listPrice1 = new BigDecimal(listPrice);
         double discountPercent = Double.parseDouble((request.getParameter("discount_percent")));
-
         BigDecimal discountPercent1 = new BigDecimal(discountPercent);
         BigDecimal discountAmount = new BigDecimal(listPrice * discountPercent * 0.01);
         BigDecimal discountPrice = new BigDecimal(listPrice + (listPrice * discountPercent * 0.01));
-        request.setAttribute("productDescription", productDescription);
 
+        request.setAttribute("productDescription", productDescription);
         request.setAttribute("listPrice", listPrice1);
         request.setAttribute("discountPercent", discountPercent1);
         request.setAttribute("discountAmount", discountAmount);
