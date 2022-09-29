@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="application_calculator.main:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/application_calculator_main_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="application_calculator.main" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: javax.servlet:jstl:1.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="application_calculator.main/web/Web Gradle : application_calculator-1.0-SNAPSHOT.war" />
+    </root>
+  </artifact>
+</component>
