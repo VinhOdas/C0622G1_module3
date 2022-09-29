@@ -14,6 +14,7 @@ import java.util.List;
     @WebServlet(name = "DisplayLibraryListServlet", urlPatterns = "/display")
 public class DisplayLibraryListServlet extends HttpServlet {
     private static List<Customer> customerList = new ArrayList<>();
+
     static {
         customerList.add(new Customer(1,"Mai Văn Hoàn","1983-08-05","Hà Nội"));
         customerList.add(new Customer(2,"Mai Văn Hoàn1","1983-08-05","Đà Nẵng"));
@@ -21,6 +22,7 @@ public class DisplayLibraryListServlet extends HttpServlet {
         customerList.add(new Customer(4,"Mai Văn Hoàn3","1983-08-05","Hà Nội"));
         customerList.add(new Customer(5,"Mai Văn Hoàn4","1983-08-05","Hà Nội"));
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
