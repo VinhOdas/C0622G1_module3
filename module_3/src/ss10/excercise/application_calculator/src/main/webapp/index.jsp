@@ -43,7 +43,7 @@
     </fieldset>
   </form>
 
-  <h1>Result: ${result}</h1>
+  <h1>Hiển thị kết quả: ${result}</h1>
   </body>
 
 </html>
