@@ -24,7 +24,7 @@
         <td>Edit</td>
         <td>Delete</td>
     </tr>
-    <c:forEach items='${requestScope["product"]}' var="data">
+    <c:forEach  items='${requestScope["products"]}' var="data">
         <tr>
             <td><a href="/product?action=view&id=${data.getId()}">${data.getNameProduct()}</a></td>
             <td>${data.getPriceProduct()}</td>

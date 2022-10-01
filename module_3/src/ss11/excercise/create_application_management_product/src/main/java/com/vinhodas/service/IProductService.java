@@ -4,8 +4,9 @@ import com.vinhodas.model.Product;
 
 import java.util.List;
 
-public interface ProductService {
-    List<Product> displayProduct();
+public interface IProductService {
+
+    List<Product> findAll();
     void save(Product product);
 
     Product findById(int id);
