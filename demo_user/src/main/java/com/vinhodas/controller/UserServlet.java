@@ -1,7 +1,7 @@
 package com.vinhodas.controller;
 
 import com.vinhodas.model.User;
-import com.vinhodas.service.impl.UserDAO;
+import com.vinhodas.repository.impl.UserDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
