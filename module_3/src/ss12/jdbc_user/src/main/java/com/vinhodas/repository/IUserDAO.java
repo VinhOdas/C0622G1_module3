@@ -15,4 +15,12 @@ public interface IUserDAO {
     public boolean deleteUser(int id) throws SQLException;
 
     public boolean updateUser(User user) throws SQLException;
+
+    List<User> findByCountry(String country);
+
+    List<User> sortByName();
+
+    User getUserById(int id);
+
+    boolean insertUserStore(User user) throws SQLException;
 }
