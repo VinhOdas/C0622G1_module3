@@ -1,7 +1,6 @@
 package com.vinhodas.controller;
 
 import com.vinhodas.model.User;
-import com.vinhodas.repository.impl.UserDAO;
 import com.vinhodas.service.impl.UserSerivce;
 
 import javax.servlet.RequestDispatcher;
