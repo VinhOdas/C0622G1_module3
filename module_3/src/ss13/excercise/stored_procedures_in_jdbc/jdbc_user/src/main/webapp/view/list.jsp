@@ -46,30 +46,87 @@
                <td><c:out value="${user.email}"/></td>
                <td><c:out value="${user.country}"/></td>
                <td>
-                   <a href="/users?action=edit&id=${user.id}">Edit</a>
-                   <!-- Button trigger modal -->
-                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal${user.id}">
+
+<%--                   <a href="/users?action=edit&id=${user.id}">Edit</a>--%>
+                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh_Edit${user.id}">
+                       Edit
+                   </button>
+
+                   <!-- Modal edit -->
+<%--                   <div class="modal fade" id="exampleModal${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--                       <div class="modal-dialog">--%>
+<%--                           <div class="modal-content">--%>
+<%--                               <div class="modal-header">--%>
+<%--                                   <h5 class="modal-title" id="exampleModalLabel" style="color: #000">sửa sản phẩm</h5>--%>
+<%--                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--                               </div>--%>
+<%--                               <div class="modal-body" style="color: #000" >--%>
+<%--                                   Bạn có muốn chỉnh sửa không ?--%>
+<%--                               </div>--%>
+<%--                               <div class="modal-footer">--%>
+<%--                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>--%>
+<%--                                   <a href="/users?action=edit&id=${user.id}" class="btn btn-danger" >Edit</a>--%>
+<%--                               </div>--%>
+<%--                           </div>--%>
+<%--                       </div>--%>
+<%--                   </div>--%>
+                   <!-- Button trigger modal edit -->
+                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh${user.id}">
                        Xoá
                    </button>
 
                    <!-- Modal -->
-                   <div class="modal fade" id="exampleModal${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                       <div class="modal-dialog">
-                           <div class="modal-content">
-                               <div class="modal-header">
-                                   <h5 class="modal-title" id="exampleModalLabel" style="color: #000">Xoá sản phẩm</h5>
-                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                               </div>
-                               <div class="modal-body" style="color: #000" >
-                                   Bạn có muốn xoá không ?
-                               </div>
-                               <div class="modal-footer">
-                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                                   <a href="/users?action=delete&id=${user.id}" class="btn btn-danger" >Xoá</a>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+<%--                   <div class="modal fade" id="exampleModal${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--                       <div class="modal-dialog">--%>
+<%--                           <div class="modal-content">--%>
+<%--                               <div class="modal-header">--%>
+<%--                                   <h5 class="modal-title" id="exampleModalLabel_delete" style="color: #000">Xoá sản phẩm</h5>--%>
+<%--                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--                               </div>--%>
+<%--                               <div class="modal-body" style="color: #000" >--%>
+<%--                                   Bạn có muốn xoá không ?--%>
+<%--                               </div>--%>
+<%--                               <div class="modal-footer">--%>
+<%--                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>--%>
+<%--                                   <a href="/users?action=delete&id=${user.id}" class="btn btn-danger" >Xoá</a>--%>
+<%--                               </div>--%>
+<%--                           </div>--%>
+<%--                       </div>--%>
+<%--                   </div>--%>
+    <div class="modal fade " id="quangVinh${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xóa <strong class="text-danger">${user.name}</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="users ?action=delete&id=${user.id}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade " id="quangVinh_Edit${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel_Edit">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có muốn xóa <strong class="text-danger">${user.name}</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="users?action=edit&id=${user.id}" class="btn btn-danger">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
                </td>
            </tr>
        </c:forEach>
