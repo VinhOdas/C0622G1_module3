@@ -1,7 +1,7 @@
 package com.vinhodas.controller;
 
 import com.vinhodas.model.User;
-import com.vinhodas.repository.impl.UserDAO;
+import com.vinhodas.service.impl.UserSerivce;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,15 +15,17 @@ import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = "/users")
 public class UserServlet extends HttpServlet {
+    private static UserSerivce userSerivce = new UserSerivce();
     private static final long serialVersionUID = 1L;
-    private UserDAO userDAO;
 
     public void init() {
-        userDAO = new UserDAO();
+        userSerivce = new UserSerivce();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -46,7 +48,7 @@ public class UserServlet extends HttpServlet {
 
     private void searchCountry(HttpServletRequest request, HttpServletResponse response) {
         String country = request.getParameter("country");
-        List<User> listUser = userDAO.selectNameCountry(country);
+        List<User> listUser = userSerivce.findByCountry(country);
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/list.jsp");
         try {
@@ -58,8 +60,9 @@ public class UserServlet extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -87,7 +90,7 @@ public class UserServlet extends HttpServlet {
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<User> listUser = userDAO.selectAllUsers();
+        List<User> listUser = userSerivce.selectAllUsers();
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/list.jsp");
         dispatcher.forward(request, response);
@@ -102,7 +105,8 @@ public class UserServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        User existingUser = userDAO.selectUser(id);
+//        User existingUser = userSerivce.selectUser(id);
+        User existingUser = userSerivce.getUserById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/edit.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
@@ -115,7 +119,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String country = request.getParameter("country");
         User newUser = new User(name, email, country);
-        userDAO.insertUser(newUser);
+        userSerivce.insertUser(newUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/create.jsp");
         dispatcher.forward(request, response);
     }
@@ -128,7 +132,7 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
 
         User book = new User(id, name, email, country);
-        userDAO.updateUser(book);
+        userSerivce.updateUser(book);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/edit.jsp");
         dispatcher.forward(request, response);
     }
@@ -136,9 +140,9 @@ public class UserServlet extends HttpServlet {
     private void deleteUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
-        userDAO.deleteUser(id);
+        userSerivce.deleteUser(id);
 
-        List<User> listUser = userDAO.selectAllUsers();
+        List<User> listUser = userSerivce.selectAllUsers();
         request.setAttribute("listUser", listUser);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/list.jsp");
         dispatcher.forward(request, response);
