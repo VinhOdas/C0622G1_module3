@@ -13,4 +13,5 @@ public interface ICustomerRepository {
 
     void insertCustomer(Customer customer);
 
+    Customer getCustomerById(int id);
 }

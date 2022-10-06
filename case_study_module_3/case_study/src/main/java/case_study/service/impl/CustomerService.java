@@ -32,4 +32,9 @@ public class CustomerService implements ICustomerService {
     public boolean updateCustomer(Customer customer) throws SQLException {
         return customerRepository.updateCustomer(customer);
     }
+
+    @Override
+    public Customer getCustomerById(int id) {
+        return customerRepository.getCustomerById(id);
+    }
 }

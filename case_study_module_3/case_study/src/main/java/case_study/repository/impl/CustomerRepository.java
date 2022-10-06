@@ -16,6 +16,7 @@ public class CustomerRepository implements ICustomerRepository {
     private static final String SELECT_ALL_CUSTOMER = "select * from customer";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (name, date_of_birth,gender,id_card,phone_number,email,address,customer_type_id) VALUES (?, ?, ?,?,?, ?, ?,?)";
     private static final String DELETE_CUSTOMERS_SQL = "delete from customer where id = ? ;";
+
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -28,6 +29,7 @@ public class CustomerRepository implements ICustomerRepository {
         }
         return connection;
     }
+
     @Override
     public boolean updateCustomer(Customer customer) {
         return false;
@@ -65,7 +67,7 @@ public class CustomerRepository implements ICustomerRepository {
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 int customerTypeId = rs.getInt("customer_type_id");
-                customers.add(new Customer(id,name,birthDay,gender,idCard,phone,email,address,customerTypeId));
+                customers.add(new Customer(id, name, birthDay, gender, idCard, phone, email, address, customerTypeId));
             }
         } catch (SQLException e) {
 
@@ -92,5 +94,10 @@ public class CustomerRepository implements ICustomerRepository {
         }
 
 
+    }
+
+    @Override
+    public Customer getCustomerById(int id) {
+        return null;
     }
 }

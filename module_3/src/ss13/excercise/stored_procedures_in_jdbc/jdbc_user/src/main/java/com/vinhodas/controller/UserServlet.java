@@ -105,7 +105,6 @@ public class UserServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-//        User existingUser = userSerivce.selectUser(id);
         User existingUser = userSerivce.getUserById(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/edit.jsp");
         request.setAttribute("user", existingUser);

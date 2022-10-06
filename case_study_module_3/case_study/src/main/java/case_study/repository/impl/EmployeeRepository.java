@@ -16,6 +16,7 @@ public class EmployeeRepository implements IEmployeeRepository {
     private static final String SELECT_ALL_EMPLOYEE = "select * from employee";
     private static final String FIND_BY_ID = "select * from employee where id = ? and status=1";
     private static final String DELETE_EMPLOYEE = "update employee set status = 0 where id = ? ";
+    private static final String UPDATE_EMPLOYEES_SQL = "update employee set name = ?,date_of_birth= ?,id_card =?,salary =?,phone_number =?,email =?,address =? ,position_id =?,education_degree_id =?,division_id =?,username =?, where id = ?";
 
     public EmployeeRepository() {
 
@@ -76,7 +77,6 @@ public class EmployeeRepository implements IEmployeeRepository {
                 String birthDay = rs.getString("date_of_birth");
                 String idCard = rs.getString("id_card");
                 double salary = rs.getDouble("salary");
-
                 String phone = rs.getString("phone_number");
                 String email = rs.getString("email");
                 String address = rs.getString("address");
@@ -111,7 +111,35 @@ public class EmployeeRepository implements IEmployeeRepository {
 
     @Override
     public boolean updateEmployee(Employee employee) {
-        return false;
+        boolean rowUpdated = false;
+        try {
+            try (Connection connection = getConnection();
+            ) {
+                try {
+                    try (PreparedStatement statement = connection.prepareStatement(UPDATE_EMPLOYEES_SQL);) {
+                        statement.setString(1, employee.getNameEmployee());
+                        statement.setString(2, employee.getBirthDay());
+                        statement.setString(3, employee.getIdCardEmployee());
+                        statement.setString(4, String.valueOf(employee.getSalaryEmployee()));
+                        statement.setString(5, employee.getPhoneNumberEmployee());
+                        statement.setString(6, employee.getEmailEmployee());
+                        statement.setString(7, employee.getAddressEmployee());
+                        statement.setString(8, String.valueOf(employee.getIdPosition()));
+                        statement.setString(9, String.valueOf(employee.getIdEducationDegree()));
+                        statement.setString(10, String.valueOf(employee.getIdDivision()));
+                        statement.setString(11, employee.getUserName());
+//                        statement.setString(12, String.valueOf(employee.getIdEmployee()));
+
+                        rowUpdated = statement.executeUpdate() > 0;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowUpdated;
     }
 
     @Override
@@ -124,21 +152,21 @@ public class EmployeeRepository implements IEmployeeRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int idEmployee = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String date_of_birth = resultSet.getString("date_of_birth");
-                String id_card = resultSet.getString("id_card");
-                double salary = resultSet.getInt("salary");
-                String phone_number = resultSet.getString("phone_number");
-                String email = resultSet.getString("email");
-                String address = resultSet.getString("address");
-                int position_id = resultSet.getInt("position_id");
-                int education_degree_id = resultSet.getInt("education_degree_id");
-                int division_id = resultSet.getInt("division_id");
+                int employeeId = resultSet.getInt("id");
+                String employeeName = resultSet.getString("name");
+                String employeeBirthday = resultSet.getString("date_of_birth");
+                String employeeIdCard = resultSet.getString("id_card");
+                double employeeSalary = resultSet.getInt("salary");
+                String employeePhone = resultSet.getString("phone_number");
+                String employeeEmail = resultSet.getString("email");
+                String employeeAddress = resultSet.getString("address");
+                int positionId = resultSet.getInt("position_id");
+                int educationDegreeId = resultSet.getInt("education_degree_id");
+                int divisionId = resultSet.getInt("division_id");
                 String username = resultSet.getString("username");
 
-                employee = new Employee(idEmployee,name,date_of_birth,id_card,salary,phone_number,email,
-                                            address,position_id,education_degree_id,division_id,username);
+                employee = new Employee(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary,
+                        employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId,username);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,4 +174,5 @@ public class EmployeeRepository implements IEmployeeRepository {
         return employee;
     }
     }
+
 

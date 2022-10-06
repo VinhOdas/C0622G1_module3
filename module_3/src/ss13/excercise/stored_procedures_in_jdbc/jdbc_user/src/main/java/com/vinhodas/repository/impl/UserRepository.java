@@ -21,7 +21,7 @@ public class UserRepository implements IUserRepository {
     private static final String SELECT_ALL_USERS_PROCEDURE = "call select_all_users" ;
     private static final String DELETE_USERS_SQL = "delete from users where id = ?";
     private static final String DELETE_USERS_SQL_PROCEDURE = "call delete_user_by_id(?);";
-    private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?;";
+    private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =? where id = ?";
     private static final String UPDATE_USERS_SQL_PROCEDURE = "call edit_user_by_id(?,?,?,?)";
 
 
@@ -129,27 +129,27 @@ public class UserRepository implements IUserRepository {
     }
 
     public boolean updateUser(User user) throws SQLException {
-//        boolean rowUpdated;
-//        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
-//            statement.setString(1, user.getName());
-//            statement.setString(2, user.getEmail());
-//            statement.setString(3, user.getCountry());
-//            statement.setInt(4, user.getId());
-//
-//            rowUpdated = statement.executeUpdate() > 0;
-//        }
-//        return rowUpdated;
         boolean rowUpdated;
-        try (Connection connection = getConnection();
-             CallableStatement callableStatement = connection.prepareCall(UPDATE_USERS_SQL_PROCEDURE);) {
-            callableStatement.setString(2, user.getName());
-            callableStatement.setString(3, user.getEmail());
-            callableStatement.setString(4, user.getCountry());
-            callableStatement.setInt(1, user.getId());
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getCountry());
+            statement.setInt(4, user.getId());
 
-            rowUpdated = callableStatement.executeUpdate() > 0;
+            rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
+//        boolean rowUpdated;
+//        try (Connection connection = getConnection();
+//             CallableStatement callableStatement = connection.prepareCall(UPDATE_USERS_SQL_PROCEDURE);) {
+//            callableStatement.setString(2, user.getName());
+//            callableStatement.setString(3, user.getEmail());
+//            callableStatement.setString(4, user.getCountry());
+//            callableStatement.setInt(1, user.getId());
+//
+//            rowUpdated = callableStatement.executeUpdate() > 0;
+//        }
+//        return rowUpdated;
     }
 
     @Override

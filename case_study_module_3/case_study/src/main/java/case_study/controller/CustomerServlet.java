@@ -18,6 +18,9 @@ import java.util.List;
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     private static CustomerService customerService = new CustomerService();
+    private Object SQLException;
+    private Object IOException;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
@@ -39,7 +42,7 @@ public class CustomerServlet extends HttpServlet {
     private void insertCustomer(HttpServletRequest request, HttpServletResponse response) {
         String name = request.getParameter("nameCustomer");
         String birthDay = request.getParameter("birthDay");
-        Boolean gender = Boolean.valueOf(request.getParameter("birthDay"));
+        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
         int idCard = Integer.parseInt(request.getParameter("idCard"));
         int phone = Integer.parseInt(request.getParameter("phone"));
         String email = request.getParameter("email");
@@ -75,6 +78,9 @@ public class CustomerServlet extends HttpServlet {
             case "add":
                 showFormAdd(request, response);
                 break;
+            case "edit":
+                showEditForm(request, response);
+                break;
             case "delete":
                 deleteCustomer(request,response);
                 break;
@@ -84,6 +90,21 @@ public class CustomerServlet extends HttpServlet {
 
         }
     }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            Customer customer = customerService.getCustomerById(id);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
+            request.setAttribute("customer", customer);
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     private void showFormAdd(HttpServletRequest request, HttpServletResponse response) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
