@@ -67,6 +67,7 @@
     </div>
     <div>
         <center>
+            <button><a href="/customer?action=add">ADD</a></button>
             <table border="2" style="border: 1px solid black" >
                 <tr >
                     <th>ID</th>
@@ -99,7 +100,7 @@
 
 
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh${data.getIdCustomer()}">
-                                <a href="/customer?action=delete">Xoá</a>
+                                <a href="/customer?action=delete?id=${data.getIdCustomer()}">Xoá</a>
                             </button>
 <%--                            <div class="modal fade " id="quangVinh${data.getIdCustomer()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
 <%--                                <div class="modal-dialog ">--%>

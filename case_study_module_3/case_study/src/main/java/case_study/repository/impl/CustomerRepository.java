@@ -14,7 +14,8 @@ public class CustomerRepository implements ICustomerRepository {
     private String Username = "root";
     private String Password = "Vinh1010";
     private static final String SELECT_ALL_CUSTOMER = "select * from customer";
-    private static final String DELETE_CUSTOMERS_SQL = "delete from customer where id = ?";
+    private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (name, date_of_birth,gender,id_card,phone_number,email,address,customer_type_id) VALUES (?, ?, ?,?,?, ?, ?,?)";
+    private static final String DELETE_CUSTOMERS_SQL = "delete from customer where id = ? ;";
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -74,6 +75,21 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public void insertCustomer(Customer customer) {
+        System.out.println(INSERT_CUSTOMER_SQL);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_CUSTOMER_SQL)) {
+            preparedStatement.setString(1, customer.getNameCustomer());
+            preparedStatement.setString(2, customer.getBirthDay());
+            preparedStatement.setBoolean(3, customer.isGender());
+            preparedStatement.setString(4, String.valueOf(customer.getIdCard()));
+            preparedStatement.setString(5, String.valueOf(customer.getPhone()));
+            preparedStatement.setString(6, customer.getEmail());
+            preparedStatement.setString(7, customer.getAddress());
+            preparedStatement.setString(8, String.valueOf(customer.getCustomerTypeId()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
     }
 }

@@ -21,6 +21,44 @@ public class CustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                insertCustomer(request,response);
+                break;
+            default:
+                listCustomer(request, response);
+                break;
+
+        }
+    }
+
+    private void insertCustomer(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("nameCustomer");
+        String birthDay = request.getParameter("birthDay");
+        Boolean gender = Boolean.valueOf(request.getParameter("birthDay"));
+        int idCard = Integer.parseInt(request.getParameter("idCard"));
+        int phone = Integer.parseInt(request.getParameter("phone"));
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
+        Customer customer = new Customer(name,birthDay,gender,idCard,phone,email,address,customerTypeId);
+        try {
+            customerService.insertCustomer(customer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,22 +72,36 @@ public class CustomerServlet extends HttpServlet {
             case "list":
                 listCustomer(request, response);
                 break;
-            case "edit":
-
+            case "add":
+                showFormAdd(request, response);
                 break;
             case "delete":
                 deleteCustomer(request,response);
                 break;
             default:
+                listCustomer(request, response);
                 break;
 
         }
+    }
+
+    private void showFormAdd(HttpServletRequest request, HttpServletResponse response) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
             int id = Integer.parseInt(request.getParameter("id"));
             try {
                 customerService.deleteCustomer(id);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/customer");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

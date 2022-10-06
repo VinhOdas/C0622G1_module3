@@ -28,7 +28,7 @@
 </center>
 <div align="center">
     <caption><h2>List of Users</h2></caption>
-    <table id="user-table" class="table table-striped table-bordered" style="width:100%">
+    <table id="user-table" class="table table-striped table-bordered"  style="width:100%">
         <thead>
         <tr>
             <th>ID</th>
@@ -52,47 +52,11 @@
                        Edit
                    </button>
 
-                   <!-- Modal edit -->
-<%--                   <div class="modal fade" id="exampleModal${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--                       <div class="modal-dialog">--%>
-<%--                           <div class="modal-content">--%>
-<%--                               <div class="modal-header">--%>
-<%--                                   <h5 class="modal-title" id="exampleModalLabel" style="color: #000">sửa sản phẩm</h5>--%>
-<%--                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                               </div>--%>
-<%--                               <div class="modal-body" style="color: #000" >--%>
-<%--                                   Bạn có muốn chỉnh sửa không ?--%>
-<%--                               </div>--%>
-<%--                               <div class="modal-footer">--%>
-<%--                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>--%>
-<%--                                   <a href="/users?action=edit&id=${user.id}" class="btn btn-danger" >Edit</a>--%>
-<%--                               </div>--%>
-<%--                           </div>--%>
-<%--                       </div>--%>
-<%--                   </div>--%>
-                   <!-- Button trigger modal edit -->
+
                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh${user.id}">
                        Xoá
                    </button>
 
-                   <!-- Modal -->
-<%--                   <div class="modal fade" id="exampleModal${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--                       <div class="modal-dialog">--%>
-<%--                           <div class="modal-content">--%>
-<%--                               <div class="modal-header">--%>
-<%--                                   <h5 class="modal-title" id="exampleModalLabel_delete" style="color: #000">Xoá sản phẩm</h5>--%>
-<%--                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                               </div>--%>
-<%--                               <div class="modal-body" style="color: #000" >--%>
-<%--                                   Bạn có muốn xoá không ?--%>
-<%--                               </div>--%>
-<%--                               <div class="modal-footer">--%>
-<%--                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>--%>
-<%--                                   <a href="/users?action=delete&id=${user.id}" class="btn btn-danger" >Xoá</a>--%>
-<%--                               </div>--%>
-<%--                           </div>--%>
-<%--                       </div>--%>
-<%--                   </div>--%>
     <div class="modal fade " id="quangVinh${user.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content bg-dark">
