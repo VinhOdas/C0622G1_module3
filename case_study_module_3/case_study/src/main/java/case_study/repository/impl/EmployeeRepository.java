@@ -13,7 +13,7 @@ public class EmployeeRepository implements IEmployeeRepository {
     private String Username = "root";
     private String Password = "Vinh1010";
     private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee" +
-            " (id, name, date_of_birth, id_card,salary," +
+            " ( name, date_of_birth, id_card,salary," +
             "phone_number,email,address," +
             "position_id,education_degree_id,division_id,username) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
     private static final String SELECT_ALL_EMPLOYEE = "select * from employee";
@@ -40,18 +40,17 @@ public class EmployeeRepository implements IEmployeeRepository {
         System.out.println(INSERT_EMPLOYEE_SQL);
         // try-with-resource statement will auto close the connection.
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEE_SQL)) {
-            preparedStatement.setString(1, String.valueOf(employee.getIdEmployee()));
-            preparedStatement.setString(2, employee.getNameEmployee());
-            preparedStatement.setString(3, employee.getBirthDay());
-            preparedStatement.setString(4, employee.getIdCardEmployee());
-            preparedStatement.setString(5, String.valueOf(employee.getSalaryEmployee()));
-            preparedStatement.setString(6, employee.getPhoneNumberEmployee());
-            preparedStatement.setString(7, employee.getEmailEmployee());
-            preparedStatement.setString(8, employee.getAddressEmployee());
-            preparedStatement.setString(9, String.valueOf(employee.getIdPosition()));
-            preparedStatement.setString(12, employee.getUserName());
-            preparedStatement.setString(10, String.valueOf(employee.getIdEducationDegree()));
-            preparedStatement.setString(11, String.valueOf(employee.getIdDivision()));
+            preparedStatement.setString(1, employee.getNameEmployee());
+            preparedStatement.setString(2, employee.getBirthDay());
+            preparedStatement.setString(3, employee.getIdCardEmployee());
+            preparedStatement.setString(4, String.valueOf(employee.getSalaryEmployee()));
+            preparedStatement.setString(5, employee.getPhoneNumberEmployee());
+            preparedStatement.setString(6, employee.getEmailEmployee());
+            preparedStatement.setString(7, employee.getAddressEmployee());
+            preparedStatement.setString(8, String.valueOf(employee.getIdPosition()));
+            preparedStatement.setString(9, String.valueOf(employee.getIdEducationDegree()));
+            preparedStatement.setString(10, String.valueOf(employee.getIdDivision()));
+            preparedStatement.setString(11, employee.getUserName());
             System.out.println(preparedStatement);
             preparedStatement.executeLargeUpdate();
         } catch (SQLException e) {

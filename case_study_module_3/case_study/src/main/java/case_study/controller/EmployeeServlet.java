@@ -1,5 +1,6 @@
 package case_study.controller;
 
+import case_study.model.ClassSub.Customer;
 import case_study.model.ClassSub.Employee;
 import case_study.service.impl.EmployeeService;
 
@@ -19,7 +20,48 @@ public class EmployeeServlet extends HttpServlet {
     private static EmployeeService employeeService = new EmployeeService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "add":
+                insertEmployee(request,response);
+                break;
+            default:
+                listEmployee(request, response);
+                break;
 
+        }
+    }
+
+    private void insertEmployee(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("nameEmployee");
+        String birthDay = request.getParameter("birthDay");
+        String idCardEmployee  = request.getParameter("idCardEmployee");
+        double salaryEmployee = Double.parseDouble(request.getParameter("salaryEmployee"));
+        String phone = request.getParameter("phoneNumberEmployee");
+        String email = request.getParameter("emailEmployee");
+        String address = request.getParameter("addressEmployee");
+        int idPosition = Integer.parseInt(request.getParameter("idPosition"));
+        int idEducationDegree = Integer.parseInt(request.getParameter("idEducationDegree"));
+        int idDivision = Integer.parseInt(request.getParameter("idDivision"));
+        String userName = request.getParameter("userName");
+        Employee employee = new Employee(name,birthDay,idCardEmployee,salaryEmployee,phone,email,address,idPosition,
+                idEducationDegree,idDivision,userName);
+        try {
+            employeeService.insertEmployee(employee);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +80,7 @@ public class EmployeeServlet extends HttpServlet {
     
                 break;
             default:
-                homeEmployee(request,response);
+                listEmployee(request,response);
                 break;
     
         }
@@ -46,11 +88,20 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void addFormEmployee(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
     private void homeEmployee(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/employee.jsp");
         try {
             dispatcher.forward(request,response);
         } catch (ServletException e) {
@@ -63,7 +114,7 @@ public class EmployeeServlet extends HttpServlet {
     private void listEmployee(HttpServletRequest request, HttpServletResponse response) {
         List<Employee> employeeList = employeeService.selectAllEmployee();
         request.setAttribute("listEmployee", employeeList);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/employee.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
