@@ -12,11 +12,10 @@ public class EmployeeRepository implements IEmployeeRepository {
     private String URL = "jdbc:mysql://localhost:3306/data_furama ?useSSL=false";
     private String Username = "root";
     private String Password = "Vinh1010";
-    private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee" +
-            " ( name, date_of_birth, id_card,salary," +
-            "phone_number,email,address," +
-            "position_id,education_degree_id,division_id,username) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+    private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee(`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`, `email`, `address`, `position_id`, `education_degree_id`, `division_id`,`username`) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SELECT_ALL_EMPLOYEE = "select * from employee";
+    private static final String FIND_BY_ID = "select * from employee where id = ? and status=1";
+    private static final String DELETE_EMPLOYEE = "update employee set status = 0 where id = ? ";
 
     public EmployeeRepository() {
 
@@ -52,7 +51,7 @@ public class EmployeeRepository implements IEmployeeRepository {
             preparedStatement.setString(10, String.valueOf(employee.getIdDivision()));
             preparedStatement.setString(11, employee.getUserName());
             System.out.println(preparedStatement);
-            preparedStatement.executeLargeUpdate();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
         }
@@ -96,11 +95,55 @@ public class EmployeeRepository implements IEmployeeRepository {
 
     @Override
     public boolean deleteEmployee(int id) {
-        return false;
+        boolean rowDelete = false;
+        Connection connection = getConnection();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE);
+            preparedStatement.setInt(1, id);
+            rowDelete = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rowDelete;
     }
 
     @Override
     public boolean updateEmployee(Employee employee) {
         return false;
     }
-}
+
+    @Override
+    public Employee findEmployeeById(int id) {
+        Employee employee = null;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int idEmployee = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String date_of_birth = resultSet.getString("date_of_birth");
+                String id_card = resultSet.getString("id_card");
+                double salary = resultSet.getInt("salary");
+                String phone_number = resultSet.getString("phone_number");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                int position_id = resultSet.getInt("position_id");
+                int education_degree_id = resultSet.getInt("education_degree_id");
+                int division_id = resultSet.getInt("division_id");
+                String username = resultSet.getString("username");
+
+                employee = new Employee(idEmployee,name,date_of_birth,id_card,salary,phone_number,email,
+                                            address,position_id,education_degree_id,division_id,username);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
+    }
+    }
+

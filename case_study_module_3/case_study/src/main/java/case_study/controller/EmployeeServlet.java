@@ -76,8 +76,10 @@ public class EmployeeServlet extends HttpServlet {
             case "add":
                 addFormEmployee(request,response);
                 break;
+            case "edit":
+                showEditForm(request,response);
             case "delete":
-    
+                deleteEmployee(request,response);
                 break;
             default:
                 listEmployee(request,response);
@@ -85,6 +87,36 @@ public class EmployeeServlet extends HttpServlet {
     
         }
 
+    }
+
+    private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
+        int idEmployee = Integer.parseInt(request.getParameter("idEmployee"));
+        boolean check = false;
+        try {
+            check = employeeService.deleteEmployee(idEmployee);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        String message = "Không xóa được";
+        if (check) {
+            message = "Xóa nhân viên thành công";
+        }
+        request.setAttribute("message", message);
+        request.setAttribute("check", check);
+        listEmployee(request,response);
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("idEmployee"));
+        Employee employee = employeeService.findEmployeeById(id);
+        request.setAttribute("employee",employee);
+        try {
+            request.getRequestDispatcher("view/employee/editEmployee.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addFormEmployee(HttpServletRequest request, HttpServletResponse response) {

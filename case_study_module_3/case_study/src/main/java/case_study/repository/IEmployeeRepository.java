@@ -13,4 +13,6 @@ public interface IEmployeeRepository {
 
     boolean updateEmployee(Employee employee);
 
+    Employee findEmployeeById(int id);
+
 }
