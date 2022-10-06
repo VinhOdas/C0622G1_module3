@@ -41,10 +41,10 @@
                                 <a class="nav-link active" aria-current="page" href="#" >Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/employee">Employee</a>
+                                <a class="nav-link" href="/employee?action=list">Employee</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/customer">Customer</a>
+                                <a class="nav-link" href="/customer?action=list">Customer</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/service">Service</a>

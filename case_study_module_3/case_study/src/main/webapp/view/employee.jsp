@@ -40,24 +40,17 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/home" >Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="/employee" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Danh sách nhân viên
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#">Room</a></li>
-                                    <li><a class="dropdown-item" href="#">Villa</a></li>
-                                    <li><a class="dropdown-item" href="#">House</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/employee?action=list" >Danh sách nhân viên</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#" >Thêm mới nhân viên</a>
+                                <a class="nav-link active" aria-current="page" href="/customer" >Customer</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#" >Chỉnh sửa nhân viên</a>
+                                <a class="nav-link active" aria-current="page" href="/service" >Service</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#" >Xóa nhân viên</a>
+                                <a class="nav-link active" aria-current="page" href="#" >Contact</a>
                             </li>
                         </ul>
                         <form class="d-flex">
@@ -73,66 +66,52 @@
         <div class="container"></div>
     </div>
     <div>
-
+        <center>
+            <table border="2" >
+                <tr >
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>BIRTH DAY</th>
+                    <th>ID CARD</th>
+                    <th>SALARY</th>
+                    <th>PHONE NUMBER</th>
+                    <th>EMAIL</th>
+                    <th>ADDRESS</th>
+                    <th>ID POSITION</th>
+                    <th>ID EDUCATION DEGREE</th>
+                    <th>ID DIVISION</th>
+                    <th>ID USERNAME</th>
+                    <th>ACTION</th>
+                </tr>
+                <c:forEach var="data" items="${listEmployee}">
+                    <tr>
+                        <td><c:out value="${data.getIdEmployee()}"/></td>
+                        <td><c:out value="${data.getNameEmployee()}"/></td>
+                        <td><c:out value="${data.getBirthDay()}"/></td>
+                        <td><c:out value="${data.getIdCardEmployee()}"/></td>
+                        <td><c:out value="${data.getSalaryEmployee()}"/></td>
+                        <td><c:out value="${data.getPhoneNumberEmployee()}"/></td>
+                        <td><c:out value="${data.getEmailEmployee()}"/></td>
+                        <td><c:out value="${data.getAddressEmployee()}"/></td>
+                        <td><c:out value="${data.getIdPosition()}"/></td>
+                        <td><c:out value="${data.getIdEducationDegree()}"/></td>
+                        <td><c:out value="${data.getIdDivision()}"/></td>
+                        <td><c:out value="${data.getUserName()}"/></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh_Edit${data.getIdEmployee()}">
+                                Edit
+                            </button>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh${data.getIdEmployee()}">
+                                Xoá
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </center>
     </div>
-    <%-- start bảng navbar--%>
+</div>
 
-    <%--  end bảng navbar--%>
-    <%--  start bảng casou--%>
-    <div class="row mx-0 position-relative " style="height: 90%;margin-top: 0">
-
-        <div class="col-12 col-sm -4 col-md-3  px-0 " >
-            <div class="list-group min-vh-100 navbar-nav-scroll " style="border: 2px solid #7952b3; height: 100%">
-                <button type="button" class="list-group-item list-group-item-action " aria-current="true">
-                    The current button
-                </button>
-                <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                </button>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-8 col-md-9 ">'
-            <div class="d-flex flex-wrap " >
-
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="../image/furama_beach_canva.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../image/furama_beach_canva.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="../image/furama_beach_canva.png" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-        <%--  end bảng casou--%>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 
