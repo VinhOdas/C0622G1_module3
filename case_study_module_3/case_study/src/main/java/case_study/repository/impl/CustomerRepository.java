@@ -43,15 +43,13 @@ public class CustomerRepository implements ICustomerRepository {
                     try (PreparedStatement statement = connection.prepareStatement(UPDATE_CUSTOMER_SQL);) {
                         statement.setString(1, customer.getNameCustomer());
                         statement.setString(2, customer.getBirthDay());
-                        statement.setString(3, String.valueOf(customer.isGender()));
+                        statement.setBoolean(3, customer.isGender());
                         statement.setString(4, String.valueOf(customer.getIdCard()));
                         statement.setString(5, String.valueOf(customer.getPhone()));
                         statement.setString(6, customer.getEmail());
                         statement.setString(7, customer.getAddress());
                         statement.setString(8, String.valueOf(customer.getCustomerTypeId()));
-
-
-
+                        statement.setString(9, String.valueOf(customer.getIdCustomer()));
                         rowUpdated = statement.executeUpdate() > 0;
                     }
                 } catch (SQLException throwables) {
