@@ -55,11 +55,7 @@ public class EmployeeServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         Employee employee = new Employee(id,nameEdit, birthDay, idCardEmployee, salaryEmployee, phone, email, address, idPosition,
                 idEducationDegree, idDivision, userName);
-        try {
-            employeeService.updateEmployee(employee);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        employeeService.updateEmployee(employee);
         response.sendRedirect("/employee");
 //        try {
 ////            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/editEmployee.jsp");
@@ -83,7 +79,7 @@ public class EmployeeServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         Employee employee = new Employee(name, birthDay, idCardEmployee, salaryEmployee, phone, email, address, idPosition,
                 idEducationDegree, idDivision, userName);
-        try {
+
             employeeService.insertEmployee(employee);
             RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
             try {
@@ -91,9 +87,7 @@ public class EmployeeServlet extends HttpServlet {
             } catch (ServletException | IOException e) {
                 e.printStackTrace();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -102,9 +96,7 @@ public class EmployeeServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "list":
-                listEmployee(request, response);
-                break;
+
             case "add":
                 addFormEmployee(request, response);
                 break;
@@ -125,11 +117,7 @@ public class EmployeeServlet extends HttpServlet {
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
         int idEmployee = Integer.parseInt(request.getParameter("id"));
         boolean check = false;
-        try {
-            check = employeeService.deleteEmployee(idEmployee);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        check = employeeService.deleteEmployee(idEmployee);
         String message = "Không xóa được";
         if (check) {
             message = "Xóa nhân viên thành công";

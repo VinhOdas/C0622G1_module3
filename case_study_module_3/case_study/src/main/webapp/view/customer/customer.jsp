@@ -129,30 +129,30 @@
                             </div>
                         </td>
 
-<%--                        <td>--%>
-<%--                            <!-- Button trigger modal DELETE -->--%>
-<%--                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sp${data.getIdCustomer()}">--%>
-<%--                                Delete--%>
-<%--                            </button>--%>
-<%--                            <!-- Modal -->--%>
-<%--                            <div class="modal fade " id="sp${data.getIdCustomer()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
-<%--                                <div class="modal-dialog ">--%>
-<%--                                    <div class="modal-content bg-dark">--%>
-<%--                                        <div class="modal-header">--%>
-<%--                                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>--%>
-<%--                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="modal-body">--%>
-<%--                                            <strong class="text-danger">ARE YOU SURE DELETE ${data.getNameCustomer()} ?</strong>--%>
-<%--                                        </div>--%>
-<%--                                        <div class="modal-footer">--%>
-<%--                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>--%>
-<%--                                            <a href="/customer?action=delete&id=${data.getIdCustomer()}" class="btn btn-danger">Delete</a>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                            </div>--%>
-<%--                        </td>--%>
+                        <td>
+                            <!-- Button trigger modal DELETE -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sp${data.getIdCustomer()}">
+                                Delete
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade " id="sp${data.getIdCustomer()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog ">
+                                    <div class="modal-content bg-dark">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <strong class="text-danger">ARE YOU SURE DELETE ${data.getNameCustomer()} ?</strong>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a href="/customer?action=delete&id=${data.getIdCustomer()}" class="btn btn-danger">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
 
                 </c:forEach>

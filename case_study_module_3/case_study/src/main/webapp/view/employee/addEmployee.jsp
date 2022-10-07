@@ -83,6 +83,7 @@
                 <th>Employee idDivision:</th>
                 <td>
                     <input type="text" name="idDivision" id="idDivision" size="45"/>
+
                 </td>
             </tr>
             <tr>

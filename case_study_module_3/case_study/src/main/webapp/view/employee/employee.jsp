@@ -17,8 +17,7 @@
                         <img src="../../image/logo_furama.png" alt="" width="80" height="100"
                              class="d-inline-block align-content-center">
                     </a>
-                    <strong style="color: white; font-family: 'Lucida Sans'; font-size: 20px; margin-right: 0px">Phạm
-                        Quang Vinh</strong>
+                    <strong style="color: white; font-family: 'Lucida Sans'; font-size: 20px; margin-right: 0px">Phạm Quang Vinh</strong>
                 </div>
             </nav>
         </div>
@@ -73,7 +72,7 @@
             <table border="2" id="tableemployee" >
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>STT</th>
                     <th>NAME</th>
                     <th>BIRTH DAY</th>
                     <th>ID CARD</th>
@@ -90,9 +89,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="data" items="${listEmployee}">
+                <c:forEach var="data" items="${listEmployee}" varStatus="stt">
                     <tr>
-                        <td><c:out value="${data.getIdEmployee()}"/></td>
+                        <td>${stt.count}</td>
                         <td><c:out value="${data.getNameEmployee()}"/></td>
                         <td><c:out value="${data.getBirthDay()}"/></td>
                         <td><c:out value="${data.getIdCardEmployee()}"/></td>
@@ -122,7 +121,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body" style="color: #000">
+                                        <div class="modal-body" style="color: #000 ; text-decoration-color: white " >
                                             Bạn có muốn thay đổi thông tin <strong class="text-danger">${data.getNameEmployee()}</strong>
                                             không ?
                                         </div>
@@ -144,13 +143,14 @@
                             <!-- Modal -->
                             <div class="modal fade " id="sp${data.getIdEmployee()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog ">
-                                    <div class="modal-content bg-dark">
+                                    <div class="modal-content bg-white">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <strong class="text-danger">ARE YOU SURE DELETE ${data.getNameEmployee()} ?</strong>
+                                        <div class="modal-body" style="color: #000 ; text-decoration-color: white " >
+                                            Bạn có muốn xóa <strong class="text-danger">${data.getNameEmployee()}</strong>
+                                            không ?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

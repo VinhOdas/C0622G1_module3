@@ -13,9 +13,9 @@ public class CustomerRepository implements ICustomerRepository {
     private String URL = "jdbc:mysql://localhost:3306/data_furama ?useSSL=false";
     private String Username = "root";
     private String Password = "Vinh1010";
-    private static final String SELECT_ALL_CUSTOMER = "select * from customer";
+    private static final String SELECT_ALL_CUSTOMER = "select * from customer where is_delete = 0";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (name, date_of_birth,gender,id_card,phone_number,email,address,customer_type_id) VALUES (?, ?, ?,?,?, ?, ?,?)";
-    private static final String DELETE_CUSTOMERS_SQL = "delete from customer where id = ? ;";
+    private static final String DELETE_CUSTOMERS_SQL = "update customer  set is_delete= 1 where id = ?;";
     private static final String FIND_BY_ID = "select * from customer where id = ?";
     private static final String UPDATE_CUSTOMER_SQL = "update customer set name = ?,date_of_birth= ?,gender =?,id_card =?,phone_number =?,email =?,address =? ,customer_type_id =?  where id = ? and is_delete = 0";
     ;
@@ -65,8 +65,8 @@ public class CustomerRepository implements ICustomerRepository {
     @Override
     public boolean deleteCustomer(int id) {
         boolean rowDeleted = false;
-        try (Connection connection = getConnection(); PreparedStatement statement
-                = connection.prepareStatement(DELETE_CUSTOMERS_SQL);) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_CUSTOMERS_SQL);) {
             statement.setInt(1, id);
             rowDeleted = statement.executeUpdate() > 0;
         } catch (SQLException throwables) {

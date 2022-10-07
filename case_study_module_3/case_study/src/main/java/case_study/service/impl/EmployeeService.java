@@ -11,7 +11,7 @@ import java.util.List;
 public class EmployeeService implements IEmployeeService {
     private IEmployeeRepository employeeRepository = new EmployeeRepository();
     @Override
-    public void insertEmployee(Employee employee) throws SQLException {
+    public void insertEmployee(Employee employee)  {
         employeeRepository.insertEmployee(employee);
     }
 
@@ -21,12 +21,12 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public boolean deleteEmployee(int id) throws SQLException {
+    public boolean deleteEmployee(int id)  {
         return employeeRepository.deleteEmployee(id);
     }
 
     @Override
-    public boolean updateEmployee(Employee employee) throws SQLException {
+    public boolean updateEmployee(Employee employee)  {
         return employeeRepository.updateEmployee(employee);
     }
 

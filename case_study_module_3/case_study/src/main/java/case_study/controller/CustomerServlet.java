@@ -35,6 +35,7 @@ public class CustomerServlet extends HttpServlet {
             case "edit":
                 editCustomer(request, response);
                 break;
+
             default:
                 listCustomer(request, response);
                 break;
@@ -108,7 +109,11 @@ public class CustomerServlet extends HttpServlet {
                 showEditForm(request, response);
                 break;
             case "delete":
-                deleteCustomer(request,response);
+                try {
+                    deleteCustomer(request,response);
+                } catch (java.sql.SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 break;
             default:
                 listCustomer(request, response);
@@ -144,16 +149,22 @@ public class CustomerServlet extends HttpServlet {
 
     }
 
-    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) {
-            int id = Integer.parseInt(request.getParameter("id"));
-            try {
-                customerService.deleteCustomer(id);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/customer");
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        int idCustomer = Integer.parseInt(request.getParameter("id"));
+        boolean check = false;
+        try {
+            check = customerService.deleteCustomer(idCustomer);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-
+        String message = "Không xóa được";
+        if (check) {
+            message = "Xóa nhân viên thành công";
+        }
+        request.setAttribute("message", message);
+        request.setAttribute("check", check);
+        listCustomer(request, response);
+    }
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) {
         List<Customer> customerList = customerService.selectAllCustomer();
         request.setAttribute("customerList", customerList);
