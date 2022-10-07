@@ -44,6 +44,9 @@
                                 <a class="nav-link active" aria-current="page" href="/customer?action=list" >Danh sách khách hàng</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/customer?action=add" >Thêm mới khách hàng</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/employee" >Employee</a>
                             </li>
                             <li class="nav-item">
@@ -95,7 +98,7 @@
                         <td><c:out value="${data.getCustomerTypeId()}"/></td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh_Edit${data.getIdCustomer()}">
-                                Edit
+                                <a href="/customer?action=edit?id=${data.getIdCustomer()}">Edit</a>
                             </button>
 
 

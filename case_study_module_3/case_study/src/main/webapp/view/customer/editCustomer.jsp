@@ -18,16 +18,14 @@
     </p>
 </center>
 <div align="center">
-    <form method="post">
+    <form action="/customer?action=edit" method="post">
         <table border="1" cellpadding="5">
+            <input type="hidden" name="idEmployee" value="${employee.idEmployee}">
             <caption>
                 <h2>
                     Edit Employee
                 </h2>
             </caption>
-            <%--            <c:if test="${user != null}">--%>
-            <%--                <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>--%>
-            <%--            </c:if>--%>
             <tr>
                 <th>Customer Name:</th>
                 <td>

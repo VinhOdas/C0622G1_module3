@@ -16,6 +16,9 @@ public class CustomerRepository implements ICustomerRepository {
     private static final String SELECT_ALL_CUSTOMER = "select * from customer";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (name, date_of_birth,gender,id_card,phone_number,email,address,customer_type_id) VALUES (?, ?, ?,?,?, ?, ?,?)";
     private static final String DELETE_CUSTOMERS_SQL = "delete from customer where id = ? ;";
+    private static final String FIND_BY_ID = "select * from customer where id = ?";
+    private static final String UPDATE_CUSTOMER_SQL = "update customer set name = ?,date_of_birth= ?,gender =?,id_card =?,phone_number =?,email =?,address =? ,customer_type_id =?  where id = ? and is_delete = 0";
+    ;
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -32,7 +35,33 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public boolean updateCustomer(Customer customer) {
-        return false;
+        boolean rowUpdated = false;
+        try {
+            try (Connection connection = getConnection();
+            ) {
+                try {
+                    try (PreparedStatement statement = connection.prepareStatement(UPDATE_CUSTOMER_SQL);) {
+                        statement.setString(1, customer.getNameCustomer());
+                        statement.setString(2, customer.getBirthDay());
+                        statement.setString(3, String.valueOf(customer.isGender()));
+                        statement.setString(4, String.valueOf(customer.getIdCard()));
+                        statement.setString(5, String.valueOf(customer.getPhone()));
+                        statement.setString(6, customer.getEmail());
+                        statement.setString(7, customer.getAddress());
+                        statement.setString(8, String.valueOf(customer.getCustomerTypeId()));
+
+
+
+                        rowUpdated = statement.executeUpdate() > 0;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return rowUpdated;
     }
 
     @Override
@@ -82,7 +111,6 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setString(1, customer.getNameCustomer());
             preparedStatement.setString(2, customer.getBirthDay());
             preparedStatement.setBoolean(3, customer.isGender());
-
             preparedStatement.setString(4, String.valueOf(customer.getIdCard()));
             preparedStatement.setString(5, String.valueOf(customer.getPhone()));
             preparedStatement.setString(6, customer.getEmail());
@@ -98,6 +126,29 @@ public class CustomerRepository implements ICustomerRepository {
 
     @Override
     public Customer getCustomerById(int id) {
-        return null;
+        Customer customer = null;
+        Connection connection = getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int idCustomer = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String date_of_birth = resultSet.getString("date_of_birth");
+                Boolean gender = Boolean.valueOf(resultSet.getString("gender"));
+                int id_card = resultSet.getInt("id_card");
+                int phone_number = Integer.parseInt(resultSet.getString("phone_number"));
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+                int customer_type_id = resultSet.getInt("customer_type_id");
+                customer = new Customer(idCustomer,name,date_of_birth,gender,id_card,phone_number,email,address,customer_type_id);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
     }
 }

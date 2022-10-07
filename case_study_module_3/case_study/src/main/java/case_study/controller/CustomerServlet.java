@@ -32,10 +32,36 @@ public class CustomerServlet extends HttpServlet {
             case "add":
                 insertCustomer(request,response);
                 break;
+            case "edit":
+                editCustomer(request, response);
+                break;
             default:
                 listCustomer(request, response);
                 break;
 
+        }
+    }
+
+    private void editCustomer(HttpServletRequest request, HttpServletResponse response) {
+        int id = Integer.parseInt(request.getParameter("idCustomer"));
+        String name = request.getParameter("nameCustomer");
+        String birthDay = request.getParameter("birthDay");
+        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
+        int idCard = Integer.parseInt(request.getParameter("idCard"));
+        int phone = Integer.parseInt(request.getParameter("phone"));
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
+        Customer customer = new Customer(id,name,birthDay,gender,idCard,phone,email,address,customerTypeId);
+        try {
+            customerService.updateCustomer(customer);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            response.sendRedirect("/customer");
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -94,8 +120,8 @@ public class CustomerServlet extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
             int id = Integer.parseInt(request.getParameter("id"));
             Customer customer = customerService.getCustomerById(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
             request.setAttribute("customer", customer);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException e) {

@@ -86,6 +86,7 @@
                     <th>ID DIVISION</th>
                     <th>ID USERNAME</th>
                     <th>ACTION</th>
+                    <th>ACTION</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -104,47 +105,56 @@
                         <td><c:out value="${data.getIdDivision()}"/></td>
                         <td><c:out value="${data.getUserName()}"/></td>
                         <td>
-
-                                <%--                   <a href="/users?action=edit&id=${user.id}">Edit</a>--%>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh_Edit${data.idEmployee}">
-                                Edit
+                                <%--                    <!-- Button trigger modal EDIT -->--%>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal1${data.getIdEmployee()}">
+                                Chỉnh Sửa
                             </button>
 
-
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#quangVinh${data.idEmployee}">
-                                Xoá
-                            </button>
-
-                            <div class="modal fade " id="quangVinh${data.idEmployee}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog ">
-                                    <div class="modal-content bg-dark">
+                                <%--                    <!-- Modal -->--%>
+                            <div class="modal fade" id="exampleModal1${data.getIdEmployee()}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h5 class="modal-title" id="exampleModalLabel1" style="color: #000">Thay đổi thông
+                                                tin</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            Bạn có muốn xóa <strong class="text-danger">${data.getNameEmployee()}</strong>
+                                        <div class="modal-body" style="color: #000">
+                                            Bạn có muốn thay đổi thông tin <strong class="text-danger">${data.getNameEmployee()}</strong>
+                                            không ?
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a href="employee?action=delete&id=${data.idEmployee}" class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                            </button>
+                                            <a href="/employee?action=edit&id=${data.getIdEmployee()}" class="btn btn-secondary">Thay Đổi</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade " id="quangVinh_Edit${data.idEmployee}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        </td>
+
+                        <td>
+                            <!-- Button trigger modal DELETE -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#sp${data.getIdEmployee()}">
+                                Delete
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade " id="sp${data.getIdEmployee()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog ">
                                     <div class="modal-content bg-dark">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel_Edit">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Bạn có muốn xóa <strong class="text-danger">${data.getNameEmployee()}</strong>
+                                            <strong class="text-danger">ARE YOU SURE DELETE ${data.getNameEmployee()} ?</strong>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <a href="employee?action=edit&id=${data.idEmployee}" class="btn btn-danger">Edit</a>
+                                            <a href="/employee?action=delete&id=${data.getIdEmployee()}" class="btn btn-danger">Delete</a>
                                         </div>
                                     </div>
                                 </div>

@@ -28,10 +28,10 @@ public class EmployeeServlet extends HttpServlet {
         }
         switch (action) {
             case "add":
-                insertEmployee(request,response);
+                insertEmployee(request, response);
                 break;
             case "edit":
-                editEmployee(request,response);
+                editEmployee(request, response);
                 break;
             default:
                 listEmployee(request, response);
@@ -40,39 +40,11 @@ public class EmployeeServlet extends HttpServlet {
         }
     }
 
-    private void editEmployee(HttpServletRequest request, HttpServletResponse response) {
-            String nameEdit = request.getParameter("nameEmployee");
-            String birthDay = request.getParameter("birthDay");
-            String idCardEmployee  = request.getParameter("idCardEmployee");
-            double salaryEmployee = Double.parseDouble(request.getParameter("salaryEmployee"));
-            String phone = request.getParameter("phoneNumberEmployee");
-            String email = request.getParameter("emailEmployee");
-            String address = request.getParameter("addressEmployee");
-            int idPosition = Integer.parseInt(request.getParameter("idPosition"));
-            int idEducationDegree = Integer.parseInt(request.getParameter("idEducationDegree"));
-            int idDivision = Integer.parseInt(request.getParameter("idDivision"));
-            String userName = request.getParameter("userName");
-            Employee employee = new Employee(nameEdit,birthDay,idCardEmployee,salaryEmployee,phone,email,address,idPosition,
-                    idEducationDegree,idDivision,userName);
-        try {
-            employeeService.updateEmployee(employee);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/editEmployee.jsp");
-        try {
-            dispatcher.forward(request, response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void insertEmployee(HttpServletRequest request, HttpServletResponse response) {
-        String name = request.getParameter("nameEmployee");
+    private void editEmployee(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("idEmployee"));
+        String nameEdit = request.getParameter("nameEmployee");
         String birthDay = request.getParameter("birthDay");
-        String idCardEmployee  = request.getParameter("idCardEmployee");
+        String idCardEmployee = request.getParameter("idCardEmployee");
         double salaryEmployee = Double.parseDouble(request.getParameter("salaryEmployee"));
         String phone = request.getParameter("phoneNumberEmployee");
         String email = request.getParameter("emailEmployee");
@@ -81,8 +53,36 @@ public class EmployeeServlet extends HttpServlet {
         int idEducationDegree = Integer.parseInt(request.getParameter("idEducationDegree"));
         int idDivision = Integer.parseInt(request.getParameter("idDivision"));
         String userName = request.getParameter("userName");
-        Employee employee = new Employee(name,birthDay,idCardEmployee,salaryEmployee,phone,email,address,idPosition,
-                idEducationDegree,idDivision,userName);
+        Employee employee = new Employee(id,nameEdit, birthDay, idCardEmployee, salaryEmployee, phone, email, address, idPosition,
+                idEducationDegree, idDivision, userName);
+        try {
+            employeeService.updateEmployee(employee);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        response.sendRedirect("/employee");
+//        try {
+////            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/editEmployee.jsp");
+////            dispatcher.forward(request, response);
+//        } catch (ServletException | IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    private void insertEmployee(HttpServletRequest request, HttpServletResponse response) {
+        String name = request.getParameter("nameEmployee");
+        String birthDay = request.getParameter("birthDay");
+        String idCardEmployee = request.getParameter("idCardEmployee");
+        double salaryEmployee = Double.parseDouble(request.getParameter("salaryEmployee"));
+        String phone = request.getParameter("phoneNumberEmployee");
+        String email = request.getParameter("emailEmployee");
+        String address = request.getParameter("addressEmployee");
+        int idPosition = Integer.parseInt(request.getParameter("idPosition"));
+        int idEducationDegree = Integer.parseInt(request.getParameter("idEducationDegree"));
+        int idDivision = Integer.parseInt(request.getParameter("idDivision"));
+        String userName = request.getParameter("userName");
+        Employee employee = new Employee(name, birthDay, idCardEmployee, salaryEmployee, phone, email, address, idPosition,
+                idEducationDegree, idDivision, userName);
         try {
             employeeService.insertEmployee(employee);
             RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
@@ -106,23 +106,24 @@ public class EmployeeServlet extends HttpServlet {
                 listEmployee(request, response);
                 break;
             case "add":
-                addFormEmployee(request,response);
+                addFormEmployee(request, response);
                 break;
             case "edit":
-                showEditForm(request,response);
+                showEditForm(request, response);
+                break;
             case "delete":
-                deleteEmployee(request,response);
+                deleteEmployee(request, response);
                 break;
             default:
-                listEmployee(request,response);
+                listEmployee(request, response);
                 break;
-    
+
         }
 
     }
 
     private void deleteEmployee(HttpServletRequest request, HttpServletResponse response) {
-        int idEmployee = Integer.parseInt(request.getParameter("idEmployee"));
+        int idEmployee = Integer.parseInt(request.getParameter("id"));
         boolean check = false;
         try {
             check = employeeService.deleteEmployee(idEmployee);
@@ -135,16 +136,16 @@ public class EmployeeServlet extends HttpServlet {
         }
         request.setAttribute("message", message);
         request.setAttribute("check", check);
-        listEmployee(request,response);
+        listEmployee(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
-        int id = Integer.parseInt(request.getParameter("idEmployee"));
+        int id = Integer.parseInt(request.getParameter("id"));
         Employee employee = employeeService.findEmployeeById(id);
 
         try {
-            request.getRequestDispatcher("view/employee/editEmployee.jsp").forward(request,response);
-            request.setAttribute("employee",employee);
+            request.setAttribute("employee", employee);
+            request.getRequestDispatcher("view/employee/editEmployee.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -168,7 +169,7 @@ public class EmployeeServlet extends HttpServlet {
     private void homeEmployee(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/employee.jsp");
         try {
-            dispatcher.forward(request,response);
+            dispatcher.forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {

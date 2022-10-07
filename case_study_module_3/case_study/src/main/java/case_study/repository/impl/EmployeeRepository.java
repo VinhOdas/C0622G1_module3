@@ -13,10 +13,10 @@ public class EmployeeRepository implements IEmployeeRepository {
     private String Username = "root";
     private String Password = "Vinh1010";
     private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee(`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`, `email`, `address`, `position_id`, `education_degree_id`, `division_id`,`username`) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SELECT_ALL_EMPLOYEE = "select * from employee";
-    private static final String FIND_BY_ID = "select * from employee where id = ? and status=1";
-    private static final String DELETE_EMPLOYEE = "update employee set status = 0 where id = ? ";
-    private static final String UPDATE_EMPLOYEES_SQL = "update employee set name = ?,date_of_birth= ?,id_card =?,salary =?,phone_number =?,email =?,address =? ,position_id =?,education_degree_id =?,division_id =?,username =?, where id = ?";
+    private static final String FIND_BY_ID = "select * from employee where id = ?";
+    private static final String DELETE_EMPLOYEES_SQL = " update employee set is_delete=1 where id = ?;";
+    private static final String DISPLAY_ALL_EMPLOYEE = "SELECT * FROM employee where is_delete = 0 ";
+    private static final String UPDATE_EMPLOYEES_SQL = "update employee set name = ?,date_of_birth= ?,id_card =?,salary =?,phone_number =?,email =?,address =? ,position_id =?,education_degree_id =?,division_id =?  where id = ? and is_delete = 0";
 
     public EmployeeRepository() {
 
@@ -65,10 +65,9 @@ public class EmployeeRepository implements IEmployeeRepository {
     @Override
     public List<Employee> selectAllEmployee() {
         List<Employee> employees = new ArrayList<>();
-        BigDecimal bd;
         try (Connection connection = getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_EMPLOYEE);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(DISPLAY_ALL_EMPLOYEE);) {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
@@ -97,9 +96,8 @@ public class EmployeeRepository implements IEmployeeRepository {
     public boolean deleteEmployee(int id) {
         boolean rowDelete = false;
         Connection connection = getConnection();
-
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEES_SQL);
             preparedStatement.setInt(1, id);
             rowDelete = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -127,8 +125,7 @@ public class EmployeeRepository implements IEmployeeRepository {
                         statement.setString(8, String.valueOf(employee.getIdPosition()));
                         statement.setString(9, String.valueOf(employee.getIdEducationDegree()));
                         statement.setString(10, String.valueOf(employee.getIdDivision()));
-                        statement.setString(11, employee.getUserName());
-//                        statement.setString(12, String.valueOf(employee.getIdEmployee()));
+                        statement.setString(11, String.valueOf(employee.getIdEmployee()));
 
                         rowUpdated = statement.executeUpdate() > 0;
                     }
@@ -166,13 +163,13 @@ public class EmployeeRepository implements IEmployeeRepository {
                 String username = resultSet.getString("username");
 
                 employee = new Employee(employeeId, employeeName, employeeBirthday, employeeIdCard, employeeSalary,
-                        employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId,username);
+                        employeePhone, employeeEmail, employeeAddress, positionId, educationDegreeId, divisionId, username);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return employee;
     }
-    }
+}
 
 
