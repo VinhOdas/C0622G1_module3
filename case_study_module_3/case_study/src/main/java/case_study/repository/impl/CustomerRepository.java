@@ -133,14 +133,14 @@ public class CustomerRepository implements ICustomerRepository {
             while (resultSet.next()) {
                 int idCustomer = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                String date_of_birth = resultSet.getString("date_of_birth");
+                String dateOfBirth = resultSet.getString("date_of_birth");
                 Boolean gender = Boolean.valueOf(resultSet.getString("gender"));
                 int idCard = resultSet.getInt("id_card");
                 int phoneNumber = Integer.parseInt(resultSet.getString("phone_number"));
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
                 int customerTypeId = resultSet.getInt("customer_type_id");
-                customer = new Customer(idCustomer,name,date_of_birth,gender,idCard,phoneNumber,email,address,customerTypeId);
+                customer = new Customer(idCustomer,name,dateOfBirth,gender,idCard,phoneNumber,email,address,customerTypeId);
 
             }
         } catch (SQLException e) {
