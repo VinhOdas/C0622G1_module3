@@ -1,4 +1,4 @@
-package case_study.model.ClassSub;
+package case_study.model;
 
 public class Customer {
     private int idCustomer;

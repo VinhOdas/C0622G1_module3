@@ -1,7 +1,6 @@
 package case_study.controller;
 
-import case_study.model.ClassSub.Customer;
-import case_study.model.ClassSub.Employee;
+import case_study.model.Employee;
 import case_study.service.impl.EmployeeService;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "EmployeeServlet", urlPatterns = "/employee")

@@ -1,7 +1,6 @@
 package case_study.service;
 
-import case_study.model.ClassSub.Customer;
-import case_study.model.ClassSub.Employee;
+import case_study.model.Customer;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,4 +15,5 @@ public interface ICustomerService {
     boolean updateCustomer(Customer customer) throws SQLException;
 
     Customer getCustomerById(int id);
+
 }

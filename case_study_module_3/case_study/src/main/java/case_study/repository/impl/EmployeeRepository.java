@@ -1,9 +1,8 @@
 package case_study.repository.impl;
 
-import case_study.model.ClassSub.Employee;
+import case_study.model.Employee;
 import case_study.repository.IEmployeeRepository;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

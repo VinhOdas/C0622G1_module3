@@ -1,9 +1,7 @@
 package case_study.controller;
 
-import case_study.model.ClassSub.Customer;
-import case_study.model.ClassSub.Employee;
+import case_study.model.Customer;
 import case_study.service.impl.CustomerService;
-import case_study.service.impl.EmployeeService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

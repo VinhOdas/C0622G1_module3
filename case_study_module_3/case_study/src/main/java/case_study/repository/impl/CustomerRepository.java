@@ -1,7 +1,6 @@
 package case_study.repository.impl;
 
-import case_study.model.ClassSub.Customer;
-import case_study.model.ClassSub.Employee;
+import case_study.model.Customer;
 import case_study.repository.ICustomerRepository;
 
 import java.math.BigDecimal;

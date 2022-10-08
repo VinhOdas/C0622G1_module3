@@ -1,11 +1,10 @@
 package case_study.service.impl;
 
-import case_study.model.ClassSub.Employee;
+import case_study.model.Employee;
 import case_study.repository.IEmployeeRepository;
 import case_study.repository.impl.EmployeeRepository;
 import case_study.service.IEmployeeService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeService implements IEmployeeService {
