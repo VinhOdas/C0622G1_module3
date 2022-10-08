@@ -34,17 +34,17 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                                <a class="nav-link active" aria-current="page" href="/home">Nhà</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/employee?action=list">Danh sách
                                     nhân viên</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/customer">Customer</a>
+                                <a class="nav-link active" aria-current="page" href="/customer">Khách hàng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/service">Service</a>
+                                <a class="nav-link active" aria-current="page" href="/service">Dịch vụ</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/employee?action=add">Thêm mới nhân
@@ -57,7 +57,7 @@
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                                    style="line-height: 35px; height: 35px">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                            <button class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>

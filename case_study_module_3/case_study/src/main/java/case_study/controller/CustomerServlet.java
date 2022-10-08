@@ -74,7 +74,7 @@ public class CustomerServlet extends HttpServlet {
         Customer customer = new Customer(name,birthDay,gender,idCard,phone,email,address,customerTypeId);
         try {
             customerService.insertCustomer(customer);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/add.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException e) {
@@ -122,7 +122,7 @@ public class CustomerServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             Customer customer = customerService.getCustomerById(id);
             request.setAttribute("customer", customer);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/editCustomer.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/edit.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException e) {
@@ -134,7 +134,7 @@ public class CustomerServlet extends HttpServlet {
 
 
     private void showFormAdd(HttpServletRequest request, HttpServletResponse response) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/addCustomer.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/customer/add.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {

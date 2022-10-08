@@ -55,12 +55,6 @@ public class EmployeeServlet extends HttpServlet {
                 idEducationDegree, idDivision, userName);
         employeeService.updateEmployee(employee);
         response.sendRedirect("/employee");
-//        try {
-////            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/editEmployee.jsp");
-////            dispatcher.forward(request, response);
-//        } catch (ServletException | IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     private void insertEmployee(HttpServletRequest request, HttpServletResponse response) {
@@ -79,7 +73,7 @@ public class EmployeeServlet extends HttpServlet {
                 idEducationDegree, idDivision, userName);
 
             employeeService.insertEmployee(employee);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/add.jsp");
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException e) {
@@ -131,7 +125,7 @@ public class EmployeeServlet extends HttpServlet {
 
         try {
             request.setAttribute("employee", employee);
-            request.getRequestDispatcher("view/employee/editEmployee.jsp").forward(request, response);
+            request.getRequestDispatcher("view/employee/edit.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -140,7 +134,7 @@ public class EmployeeServlet extends HttpServlet {
     }
 
     private void addFormEmployee(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/addEmployee.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/employee/add.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {

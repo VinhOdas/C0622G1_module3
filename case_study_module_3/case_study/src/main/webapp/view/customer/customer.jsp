@@ -47,14 +47,12 @@
                                 <a class="nav-link active" aria-current="page" href="/customer?action=add" >Thêm mới khách hàng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/employee" >Employee</a>
+                                <a class="nav-link active" aria-current="page" href="/employee" >Nhân viên</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/service" >Service</a>
+                                <a class="nav-link active" aria-current="page" href="/service" >Dịch vụ</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#" >Contact</a>
-                            </li>
+
                         </ul>
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="line-height: 35px; height: 35px">
@@ -73,7 +71,7 @@
             <button><a href="/customer?action=add">ADD</a></button>
             <table id="tablecustomer" border="2" style="border: 1px solid black" >
                 <tr >
-                    <th>ID</th>
+                    <th>STT</th>
                     <th>NAME</th>
                     <th>BIRTH DAY</th>
                     <th>GENDER</th>
@@ -83,12 +81,12 @@
                     <th>ADDRESS</th>
                     <th>CUSTOMER TYPE ID</th>
                     <th>Action</th>
-<%--                    <th>Action</th>--%>
+
 
                 </tr>
-                <c:forEach var="data" items="${customerList}">
+                <c:forEach var="data" items="${customerList}" varStatus="status">
                     <tr>
-                        <td><c:out value="${data.getIdCustomer()}"/></td>
+                        <td>${status.count}</td>
                         <td><c:out value="${data.getNameCustomer()}"/></td>
                         <td><c:out value="${data.getBirthDay()}"/></td>
                         <td><c:out value="${data.isGender()}"/></td>
