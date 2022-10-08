@@ -10,8 +10,8 @@ import java.util.List;
 
 public class EmployeeRepository implements IEmployeeRepository {
     private String URL = "jdbc:mysql://localhost:3306/data_furama ?useSSL=false";
-    private String Username = "root";
-    private String Password = "Vinh1010";
+    private String userName = "root";
+    private String passWord = "Vinh1010";
     private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO employee(`name`, `date_of_birth`, `id_card`, `salary`, `phone_number`, `email`, `address`, `position_id`, `education_degree_id`, `division_id`,`username`) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String FIND_BY_ID = "select * from employee where id = ?";
     private static final String DELETE_EMPLOYEES_SQL = " update employee set is_delete=1 where id = ?;";
@@ -26,7 +26,7 @@ public class EmployeeRepository implements IEmployeeRepository {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, Username, Password);
+            connection = DriverManager.getConnection(URL, userName, passWord);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

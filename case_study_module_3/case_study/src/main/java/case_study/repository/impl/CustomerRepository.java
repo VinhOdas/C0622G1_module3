@@ -11,8 +11,8 @@ import java.util.List;
 
 public class CustomerRepository implements ICustomerRepository {
     private String URL = "jdbc:mysql://localhost:3306/data_furama ?useSSL=false";
-    private String Username = "root";
-    private String Password = "Vinh1010";
+    private String userName = "root";
+    private String passWord = "Vinh1010";
     private static final String SELECT_ALL_CUSTOMER = "select * from customer where is_delete = 0";
     private static final String INSERT_CUSTOMER_SQL = "INSERT INTO customer (name, date_of_birth,gender,id_card,phone_number,email,address,customer_type_id) VALUES (?, ?, ?,?,?, ?, ?,?)";
     private static final String DELETE_CUSTOMERS_SQL = "update customer  set is_delete= 1 where id = ?;";
@@ -24,7 +24,7 @@ public class CustomerRepository implements ICustomerRepository {
         Connection connection = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(URL, Username, Password);
+            connection = DriverManager.getConnection(URL, userName, passWord);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
@@ -136,12 +136,12 @@ public class CustomerRepository implements ICustomerRepository {
                 String name = resultSet.getString("name");
                 String date_of_birth = resultSet.getString("date_of_birth");
                 Boolean gender = Boolean.valueOf(resultSet.getString("gender"));
-                int id_card = resultSet.getInt("id_card");
-                int phone_number = Integer.parseInt(resultSet.getString("phone_number"));
+                int idCard = resultSet.getInt("id_card");
+                int phoneNumber = Integer.parseInt(resultSet.getString("phone_number"));
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
-                int customer_type_id = resultSet.getInt("customer_type_id");
-                customer = new Customer(idCustomer,name,date_of_birth,gender,id_card,phone_number,email,address,customer_type_id);
+                int customerTypeId = resultSet.getInt("customer_type_id");
+                customer = new Customer(idCustomer,name,date_of_birth,gender,idCard,phoneNumber,email,address,customerTypeId);
 
             }
         } catch (SQLException e) {

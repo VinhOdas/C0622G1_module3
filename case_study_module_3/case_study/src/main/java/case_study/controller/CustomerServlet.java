@@ -18,8 +18,6 @@ import java.util.List;
 @WebServlet(name = "CustomerServlet", urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
     private static CustomerService customerService = new CustomerService();
-    private Object SQLException;
-    private Object IOException;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
